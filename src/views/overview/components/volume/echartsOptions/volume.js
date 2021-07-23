@@ -1,7 +1,7 @@
 export default {
   title: {
-    text: 'Liquidity',
-    fontFamily: 'Kanit, sans-serif',
+    text: 'Volume 24H',
+    fontFamily: ' Kanit, sans-serif',
     left: '10',
     top: '10'
   },
@@ -34,12 +34,12 @@ export default {
   },
   yAxis: {
     type: 'value',
-    axisLabel: { formatter: '{value} Bn' }
+    axisLabel: { formatter: '{value} M' }
   },
   series: [
     {
       data: [],
-      type: 'line',
+      type: 'bar',
       lineStyle: {
         color: 'rgb(255, 153, 0)'
       },

@@ -1,11 +1,9 @@
 <template>
-  <el-card ref="Liquidity" class="butter-card">
-    <div class=""></div>
-  </el-card>
+  <el-card ref="Volume" class="butter-card"></el-card>
 </template>
 
 <script>
-import liquidity from './echartsOptions/liquidity'
+import Volume from './echartsOptions/volume'
 export default {
   data() {
     return {
@@ -14,10 +12,10 @@ export default {
     }
   },
   mounted() {
-    this.getData()
+    this.get()
   },
   methods: {
-    getData() {
+    get() {
       // TODO: Get the chain data through the API and demonstrate into icons
       let getApiJson = [
         { date: '2021-7-1', value: '30' },
@@ -54,10 +52,10 @@ export default {
       let Dates = getApiJson.map(v => v.date)
       let values = getApiJson.map(v => v.value)
       // TODO: Get the chain data through the API and demonstrate into icons
-      liquidity.xAxis.data = Dates
-      liquidity.series[0].data = values
-      var myChart = echarts.init(this.$refs.Liquidity.$el)
-      myChart.setOption(liquidity)
+      Volume.xAxis.data = Dates
+      Volume.series[0].data = values
+      var myChart = echarts.init(this.$refs.Volume.$el)
+      myChart.setOption(Volume)
     }
   }
 }
