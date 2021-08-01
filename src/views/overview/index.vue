@@ -1,18 +1,13 @@
 <template>
-  <div class="overview">
-    <p class="title">ButterSwap Info & Analytics</p>
+  <div class="overview container">
     <div class="overBox clearfix">
+      <p class="title">ButterSwap Info & Analytics</p>
       <Liquidity />
       <Volume />
     </div>
-    <p class="title">Top Tokens</p>
-    <div class="clearfix">
-      <TopTokens />
-    </div>
-    <p class="title">Top Pools</p>
-    <div class="clearfix">
-      <TopPools />
-    </div>
+    <TopTokens />
+    <TopPools />
+    <Transactions />
   </div>
 </template>
 
@@ -21,9 +16,10 @@ import Liquidity from './components/liquidity/index'
 import Volume from './components/volume/index'
 import TopTokens from './components/topTokens/index'
 import TopPools from './components/topPools/index'
+import Transactions from './components/transactions/index'
 export default {
   name: 'overview',
-  components: { Liquidity, Volume, TopTokens, TopPools },
+  components: { Liquidity, Volume, TopTokens, TopPools, Transactions },
   data() {
     return {}
   },
@@ -37,16 +33,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.title {
-  font-size: 24px;
-  padding: 12px 0 12px 6px;
-  font-family: Kanit, sans-serif;
-}
 .overview {
-  width: 72%;
-  margin: auto;
-  padding: 20px 0 0 0;
-  text-align: left;
   .overBox {
     margin-right: -2%;
   }

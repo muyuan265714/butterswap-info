@@ -1,10 +1,14 @@
 <template>
   <div class="clearfix">
-    <p class="title">Top Pools</p>
+    <p class="title">All Tokens</p>
     <el-card ref="topTokens" class="butter-table">
       <el-table :data="tableData" style="width: 100%" :default-sort="{ prop: 'price', order: 'descending' }">
-        <el-table-column width="100" type="index"   label="#"></el-table-column>
-        <el-table-column width="400" sortable prop="name" label="NAME"></el-table-column>
+        <el-table-column width="100" type="index" label="#"></el-table-column>
+        <el-table-column width="400" sortable prop="name" label="NAME">
+          <template slot-scope="scope">
+            <div class="link" @click="goDetails(scope.row)">{{ scope.row.name }}</div>
+          </template>
+        </el-table-column>
         <el-table-column sortable prop="price" label="PRICE">
           <template slot-scope="scope">${{ scope.row.price }}</template>
         </el-table-column>
@@ -40,6 +44,9 @@ export default {
         { name: 'Tether USD(USDT)', token: '0x0asdasdasdasdasdasd', price: '6.73', isIncrease: false, volume24h: '$312M', priceChange: '3.3%', liquidity: '$332B' },
         { name: 'Butter', token: '0x0asdasdasdasdasdasd', price: '888.73', isIncrease: true, volume24h: '$4444M', priceChange: '84%', liquidity: '$239B' }
       ])
+    },
+    goDetails(item) {
+      this.$router.push('/details/' + item.token)
     },
     pageChange() {
       this.$set(this.query, 'pageNumber', '1')

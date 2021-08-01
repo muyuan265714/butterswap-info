@@ -1,10 +1,18 @@
 <template>
-  <div class="pools">pools</div>
+  <div class="pools container">
+    <WatchList />
+    <Pools />
+  </div>
 </template>
 
 <script>
+import WatchList from './components/watchList/index.vue'
+import Pools from './components/pools/index.vue'
 export default {
   name: 'pools',
-  components: {}
+  components: {
+    WatchList,
+    Pools
+  }
 }
 </script>

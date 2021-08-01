@@ -1,6 +1,6 @@
 <template>
   <div class="clearfix">
-    <p class="title">Top Pools</p>
+    <p class="title">All Pools</p>
     <el-card ref="topTokens" class="butter-table">
       <el-table :data="tableData" style="width: 100%" :default-sort="{ prop: 'price', order: 'descending' }">
         <el-table-column width="100" type="index"   label="#"></el-table-column>
