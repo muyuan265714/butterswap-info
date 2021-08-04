@@ -1,5 +1,5 @@
 <template>
-  <el-card ref="Volume" class="butter-card"></el-card>
+  <div ref="Volume" class="butterMap"></div>
 </template>
 
 <script>
@@ -54,15 +54,9 @@ export default {
       // TODO: Get the chain data through the API and demonstrate into icons
       Volume.xAxis.data = Dates
       Volume.series[0].data = values
-      var myChart = echarts.init(this.$refs.Volume.$el)
+      let myChart = echarts.init(this.$refs.Volume)
       myChart.setOption(Volume)
     }
   }
 }
 </script>
-
-<style scoped>
-.butter-card {
-  height: 360px;
-}
-</style>

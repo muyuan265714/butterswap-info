@@ -1,5 +1,5 @@
 <template>
-  <el-card ref="Liquidity" class="butter-card"></el-card>
+  <div ref="Liquidity" class="butterMap"></div>
 </template>
 
 <script>
@@ -54,7 +54,9 @@ export default {
       // TODO: Get the chain data through the API and demonstrate into icons
       liquidity.xAxis.data = Dates
       liquidity.series[0].data = values
-      var myChart = echarts.init(this.$refs.Liquidity.$el)
+      let chartDom = this.$refs.Liquidity
+      console.dir(chartDom)
+      var myChart = echarts.init(chartDom)
       myChart.setOption(liquidity)
     }
   }

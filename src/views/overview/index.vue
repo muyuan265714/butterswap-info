@@ -2,8 +2,12 @@
   <div class="overview container">
     <div class="overBox clearfix">
       <p class="title">ButterSwap Info & Analytics</p>
-      <Liquidity />
-      <Volume />
+      <el-card class="butter-card">
+        <Liquidity />
+      </el-card>
+      <el-card class="butter-card">
+        <Volume />
+      </el-card>
     </div>
     <TopTokens />
     <TopPools />
@@ -41,6 +45,7 @@ export default {
     float: left;
     width: 49%;
     margin: 0 0.5%;
+    height: 360px;
   }
 }
 </style>
