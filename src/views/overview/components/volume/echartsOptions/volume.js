@@ -6,8 +6,7 @@ export default {
     top: '10'
   },
   tooltip: {
-    trigger: 'axis',
-    formatter: '{b} : {c}'
+    trigger: 'axis'
   },
   grid: {
     left: '60px',

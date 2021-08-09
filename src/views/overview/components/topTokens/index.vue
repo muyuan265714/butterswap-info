@@ -2,9 +2,14 @@
   <div class="clearfix">
     <p class="title">Top Tokens</p>
     <el-card ref="topTokens" class="butter-table">
-      <el-table :data="tableData" style="width: 100%" :default-sort="{ prop: 'price', order: 'descending' }">
-        <el-table-column width="100" type="index"   label="#"></el-table-column>
-        <el-table-column width="400" sortable prop="name" label="NAME"></el-table-column>
+      <el-table :data="tableData" style="width: 100%" :default-sort="{ prop: 'price', order: 'descending' }" @row-click="goDetails" row-class-name="butter-row">
+        <el-table-column width="100" type="index" label="#"></el-table-column>
+        <el-table-column width="400" sortable prop="name" label="NAME">
+          <template slot-scope="scope">
+            <img class="table-icon" :src="scope.row.icon" alt="" />
+            {{ scope.row.name }}
+          </template>
+        </el-table-column>
         <el-table-column sortable prop="price" label="PRICE">
           <template slot-scope="scope">${{ scope.row.price }}</template>
         </el-table-column>
@@ -34,12 +39,10 @@ export default {
   methods: {
     get() {
       // TODO: retrieve data Give TableData
-      this.$set(this, 'tableData', [
-        { name: 'HT', token: '0x0asdasdasdasdasdasd', price: '293.73', isIncrease: true, volume24h: '$399.06M', priceChange: '0.8%', liquidity: '$1.18B' },
-        { name: 'HUSD', token: '0x0asdasdasdasdasdasd', price: '6.5', isIncrease: true, volume24h: '$200.06M', priceChange: '1.8%', liquidity: '$112B' },
-        { name: 'Tether USD(USDT)', token: '0x0asdasdasdasdasdasd', price: '6.73', isIncrease: false, volume24h: '$312M', priceChange: '3.3%', liquidity: '$332B' },
-        { name: 'Butter', token: '0x0asdasdasdasdasdasd', price: '888.73', isIncrease: true, volume24h: '$4444M', priceChange: '84%', liquidity: '$239B' }
-      ])
+      this.$set(this, 'tableData', window.testData)
+    },
+    goDetails(item) {
+      this.$router.push('/details/' + item.token)
     },
     pageChange() {
       this.$set(this.query, 'pageNumber', '1')
@@ -52,7 +55,7 @@ export default {
 <style scoped>
 .butter-table {
   float: left;
-  width: 99%;
+  width: 100%;
   margin: 0px 0.5% 0px;
 }
 </style>

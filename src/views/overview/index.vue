@@ -39,7 +39,7 @@ export default {
 <style lang="less" scoped>
 .overview {
   .overBox {
-    margin-right: -2%;
+    margin-right: -1%;
   }
   .butter-card {
     float: left;
