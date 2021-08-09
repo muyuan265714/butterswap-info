@@ -1,5 +1,10 @@
 <template>
-  <div ref="Volume" class="butterMap"></div>
+  <div>
+    <div class="__volume_title">Volume 24H</div>
+    <div class="__volume_val">${{ showValue }}</div>
+    <div class="__volume_date">{{ showDate }}</div>
+    <div ref="Volume" class="butterMap"></div>
+  </div>
 </template>
 
 <script>
@@ -54,9 +59,65 @@ export default {
       // TODO: Get the chain data through the API and demonstrate into icons
       Volume.xAxis.data = Dates
       Volume.series[0].data = values
-      let myChart = echarts.init(this.$refs.Volume)
+      var myChart = echarts.init(this.$refs.Volume)
       myChart.setOption(Volume)
+
+      let latestData = getApiJson[getApiJson.length - 1]
+
+      this.showDate = latestData.date
+      this.showValue = latestData.value
+
+      // 移动设置动态值
+      let that = this
+      myChart.on('highlight', function (params) {
+        that.showDate = getApiJson[params.batch[0].dataIndex].date
+        that.showValue = getApiJson[params.batch[0].dataIndex].value
+      })
+
+      // 鼠标移出选中最新数据
+      myChart.on('globalout', function (params) {
+        that.showDate = latestData.date
+        that.showValue = latestData.value
+      })
+      window.addEventListener('resize', function () {
+        myChart.resize()
+      })
+
+      this.$nextTick(() => {
+        window.addEventListener('resize', function () {
+          myChart.resize()
+        })
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+.butterMap {
+  margin-bottom: 20px;
+  height: 240px;
+}
+
+.__volume_title {
+  font-size: 16px;
+  color: #ff9901;
+  font-weight: 600;
+}
+.__volume_val {
+  color: #fe5e20;
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 24px;
+}
+.__volume_date {
+  color: #ff9901;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.butter_volume {
+  height: 240px;
+  width: 100%;
+}
+</style>

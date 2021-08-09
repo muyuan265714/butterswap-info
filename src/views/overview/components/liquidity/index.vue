@@ -1,5 +1,10 @@
 <template>
-  <div ref="Liquidity" class="butterMap"></div>
+  <div>
+    <div class="__liquidity_title">Liquidity</div>
+    <div class="__liquidity_val">${{ showValue }}</div>
+    <div class="__liquidity_date">{{ showDate }}</div>
+    <div ref="Liquidity" class="butterMap"></div>
+  </div>
 </template>
 
 <script>
@@ -58,13 +63,57 @@ export default {
       console.dir(chartDom)
       var myChart = echarts.init(chartDom)
       myChart.setOption(liquidity)
+      let latestData = getApiJson[getApiJson.length - 1]
+      this.showDate = latestData.date
+      this.showValue = latestData.value
+
+      // 移动设置动态值
+      let that = this
+      myChart.on('highlight', function (params) {
+        that.showDate = getApiJson[params.batch[0].dataIndex].date
+        that.showValue = getApiJson[params.batch[0].dataIndex].value
+      })
+
+      // 鼠标移出选中最新数据
+      myChart.on('globalout', function (params) {
+        that.showDate = latestData.date
+        that.showValue = latestData.value
+      })
+
+      this.$nextTick(() => {
+        window.addEventListener('resize', function () {
+          myChart.resize()
+        })
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-.butter-card {
-  height: 360px;
+.butterMap {
+  margin-bottom: 20px;
+  height: 240px;
+}
+.__liquidity_title {
+  font-size: 16px;
+  color: #ff9901;
+  font-weight: 600;
+}
+.__liquidity_val {
+  color: #fe5e20;
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 24px;
+}
+.__liquidity_date {
+  color: #ff9901;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.butter_liquidity {
+  height: 240px;
+  width: 100%;
 }
 </style>
