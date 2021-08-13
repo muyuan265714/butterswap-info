@@ -25,9 +25,3 @@ npm run serve
 These places need to invoke interface to obtain data to complete chart drawing
 
 butter will become better
-
-author: 枫  Feng
-telegram: 枫
-github: muyuan265714
-heco address: 0xE2bB6Dd28Df6e08Ae45E4827a47214A8703E3D6f
-

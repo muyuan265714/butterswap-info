@@ -42,7 +42,7 @@ export default {
       this.$set(this, 'tableData', window.testData)
     },
     goDetails(item) {
-      this.$router.push('/details/' + item.token)
+      this.$router.push('/tokenDetails/' + item.token)
     },
     pageChange() {
       this.$set(this.query, 'pageNumber', '1')

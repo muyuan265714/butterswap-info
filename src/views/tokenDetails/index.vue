@@ -11,7 +11,7 @@
           View on Heco
           <i class="el-icon-view el-icon-position"></i>
         </el-link>
-        <i class="el-icon-star-off star"></i>
+        <i style="color: #f90" @click="watch" :class="(isWatch ? 'el-icon-star-on' : 'el-icon-star-off') + ' star'"></i>
       </span>
     </div>
     <el-row>
@@ -35,7 +35,7 @@
           <Volume v-if="activeTabs == 'Volume'" />
         </el-tab-pane>
         <el-tab-pane label="Liquidity" name="Liquidity"><Liquidity v-if="activeTabs == 'Liquidity'" /></el-tab-pane>
-        <el-tab-pane label="Price" name="Price">Price</el-tab-pane>
+        <!-- <el-tab-pane label="Price" name="Price">Price</el-tab-pane> -->
       </el-tabs>
     </div>
     <Pools />
@@ -44,24 +44,41 @@
 </template>
 
 <script>
-import Liquidity from '../overview/components/liquidity/index.vue'
-import Volume from '../overview/components/volume/index.vue'
-import Pools from '../pools/components/pools/index.vue'
-import Transactions from '../overview/components/transactions/index.vue'
+import watchlist from '@/libs/utils.watchlist.js'
+import Liquidity from '@/views/overview/components/liquidity/index.vue'
+import Volume from '@/views/overview/components/volume/index.vue'
+import Pools from '@/views/pools/components/pools/index.vue'
+import Transactions from '@/views/overview/components/transactions/index.vue'
 export default {
-  components: { Liquidity, Volume,Pools,Transactions },
+  components: { Liquidity, Volume, Pools, Transactions },
   data() {
     return {
       token: this.$route.params.token,
       activeTabs: 'Volume',
+      isWatch: false,
       tokenDetail: {
         name: 'ButterSwap Token',
-        icon: ''
+        icon: '',
+        token: '0x00000'
       }
     }
   },
   mounted() {
-    console.log(this.token)
+    console.log(watchlist)
+    this.init()
+  },
+  methods: {
+    init() {
+      this.$set(this, 'isWatch', watchlist.whetherToWatch(this.token))
+    },
+    watch() {
+      if (this.isWatch) {
+        watchlist.delWatch(this.token)
+      } else {
+        watchlist.setWatch(this.tokenDetail)
+      }
+      this.$set(this, 'isWatch', !this.isWatch)
+    }
   }
 }
 </script>

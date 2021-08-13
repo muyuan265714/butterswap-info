@@ -1,0 +1,134 @@
+// APIS DOC
+
+// 0. First
+// We want to look at the return value of the specified format, easy to catch errors and display unity
+// I usually common kinds are:
+{
+  code: 200, // Status code, when the code is 200, the front end will acquire the correct result by default and show, if it is 500, the user pops the window prompts the MSG information. If there is any other status code, the front end can add this judgment.
+  msg: 'success', // If the code == 500, pop the window prompts the information in MSG.
+  data: [] || {} // You can give me an array or object
+}
+
+// 1. ButterSwap Info & Analytics APIS
+// 1.1  Liquidity APIS
+// @params token : String     Example : 0xbf84214ea409A369774321727595F218889eD943   // You can set butter for the default parameters
+// @params unit : String     Example : Bn / M / K   // This can also be processed by the front end, and all numbers can be transmitted.
+// @params dateType : String     Example : day,week,month,year   // TODO: Here I hope everyone will discuss the caliber and show which data. This will remove this parameter.
+// @params startDate : Date     Example : 2021-08-10 00:00:00
+// @params endDate : Date     Example : 2021-08-10 00:00:00
+//
+// Result:   // You can transfer more data you feel, you can use.
+{
+  code: '200',
+  msg: 'success',
+  data: [
+    { date: '2021-7-1', value: '30', unit: 'Bn' },
+    { date: '2021-7-2', value: '93', unit: 'Bn' },
+    { date: '2021-7-3', value: '90', unit: 'Bn' },
+    { date: '2021-7-4', value: '93', unit: 'Bn' },
+    { date: '2021-7-5', value: '129', unit: 'Bn' }
+  ]
+}
+
+// 1.2  Volume APIS
+// @params token : String     Example : 0xbf84214ea409A369774321727595F218889eD943
+// @params unit : String     Example : Bn / M / K   // This can also be processed by the front end, and all numbers can be transmitted.
+// @params dateType : String     Example : day,week,month,year   // TODO: Here I hope everyone will discuss the caliber and show which data. This will remove this parameter.
+// @params startDate : Date     Example : 2021-08-10 00:00:00
+// @params endDate : Date     Example : 2021-08-10 00:00:00
+//
+// Result:   // You can transfer more data you feel, you can use.
+{
+  code: '200',
+  msg: 'success',
+  data: [
+    { date: '2021-7-1', value: '30', unit: 'Bn' },
+    { date: '2021-7-2', value: '93', unit: 'Bn' },
+    { date: '2021-7-3', value: '90', unit: 'Bn' },
+    { date: '2021-7-4', value: '93', unit: 'Bn' },
+    { date: '2021-7-5', value: '129', unit: 'Bn' }
+  ]
+}
+
+// 2. Top tokens
+// @params sortBy : String     Example : name / price / priceChange / volume24h / liquidity   // This can also be sorted by the front end, but because there is a paging, the front end can only sort the top ten data already obtained.
+// @params pageSize : Number     Example : 10 (default : 10)
+// @params pageNumber : Number     Example : 1 (default : 1)
+// You can transfer more data, follow-up to change the number of rear end code
+{
+  code: '200',
+  msg: 'success',
+  data: {
+    total: 40,
+    pageNumber: 1,
+    pageSize: 10,
+    data: [
+      {
+        name: 'HUSD',
+        token: '0x0asdasdasdasdasdasd',
+        price: '6.5',
+        volume24h: '200.06M',
+        volume24hUnit: 'M',
+        priceChange: '1.8',
+        isIncrease: true, // The price is rising or falling flag.  The field name should be changed, this is my inventive
+        liquidity: '112',
+        liquidityUnit: 'B',
+        icon: 'https://swap.butterswap.me/images/coins/husd.png' // or BASE64
+      },
+      {
+        name: 'HT',
+        token: '0x0asdasdasdasdasdasd',
+        price: '293.73',
+        volume24h: '399.06',
+        volume24hUnit: 'M',
+        isIncrease: true,
+        priceChange: '0.8',
+        liquidity: '1.18',
+        liquidityUnit: 'B',
+        icon: 'data:image/png;base64,iVBORw0KGgo'
+      }
+    ]
+  }
+}
+
+// 3. Top Pools
+// Similar to Top Tokens, just the fields are different
+// params  token : String  E.g : 0xbf84214ea409A369774321727595F218889eD943    // Pools with this token
+
+// POOL
+// volume24h
+// volume7d
+// lp reward fees 24h
+// lp reward apr
+// liquidity
+
+// 4. Transactions
+// Similar to Top Tokens, just the fields are different
+// params:  type : Number    E.g:   0(ALL) / 1(Swaps) / 2(Adds) / 3(Removes)
+// params:  token : String   E.g : 0xbf84214ea409A369774321727595F218889eD943    // Transactions with this token  (Default butter)
+
+// Transaction Hash
+// action
+// total value
+// token amount
+// token amount
+// account
+// time    E.g:  50 minutes ago
+
+
+// 5. Pools Apis
+// 5.1 All Pools  (Use the same interface with TOP Pools)
+name(Cake / WBNB) / icon(https://xxx.png) / tokenPrice (['1 Cake = 0.052 WBNB','1 WBNB = 19.38 Cake'] / Or separate the data to the front end) / LP REWARD APR / LIQUIDITY / TOTAL TOKENS LOCKED   and many more
+
+
+// 6. Tokens Apis
+// 6.1 All Tokens  (Use the same interface with TOP Tokens)
+
+
+The interface we need:
+1. Pools  (all pools / top pools / pools detail)
+2. tokens  ( all tokens / top tokens / tokens detail)
+3. Transactions
+4. chart Liquidity
+4. chart Volume
+

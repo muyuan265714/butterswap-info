@@ -21,10 +21,16 @@ const defaultRoutes = [
     component: _import('tokens/index.vue')
   },
   {
-    path: '/details/:token',
-    name: 'details',
-    meta: { title: 'Details' },
-    component: _import('details/index.vue')
+    path: '/tokenDetails/:token',
+    name: 'tokenDetails',
+    meta: { title: 'tokenDetails' },
+    component: _import('tokenDetails/index.vue')
+  },
+  {
+    path: '/poolsDetails/:token',
+    name: 'poolsDetails',
+    meta: { title: 'poolsDetails' },
+    component: _import('poolsDetails/index.vue')
   }
 ]
 
